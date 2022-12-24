@@ -1,6 +1,6 @@
-package Kanban.model;
+package kanban.service;
 
-public class IdTasks {
+public class TaskIdCounter {
     private int idCounter;
 
     public int getIdCounter() {

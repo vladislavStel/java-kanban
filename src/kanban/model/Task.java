@@ -1,33 +1,34 @@
-package Kanban.model;
+package kanban.model;
 
 import java.util.Objects;
 
 public class Task {
+    protected int id;
     protected final String name;
     protected final String description;
-    protected TasksStatus status;
-    protected int id;
+    protected Status status;
+
 
     public Task(String name, String description) {
         this.name = name;
         this.description = description;
-        this.status = TasksStatus.NEW;
+        this.status = Status.NEW;
     }
 
-    public Task(String name, String description, TasksStatus status) {
+    public Task(String name, String description, Status status) {
         this.name = name;
         this.description = description;
         this.status = status;
     }
 
-    public Task(String name, String description, TasksStatus status, int id) {
+    public Task(int id, String name, String description, Status status) {
         this.name = name;
         this.description = description;
         this.status = status;
         this.id = id;
     }
 
-    public Task(String name, String description, int id) {
+    public Task(int id, String name, String description) {
         this.name = name;
         this.description = description;
         this.id = id;
@@ -41,7 +42,7 @@ public class Task {
         return description;
     }
 
-    public TasksStatus getStatus() {
+    public Status getStatus() {
         return status;
     }
 
@@ -49,15 +50,15 @@ public class Task {
         return id;
     }
 
-    public TypesTasks getType() {
-        return TypesTasks.TASK;
+    public Types getType() {
+        return Types.TASK;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setStatus(TasksStatus status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -75,12 +76,12 @@ public class Task {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return Objects.equals(name, task.name) &&
+        return id == task.id && Objects.equals(name, task.name) &&
                 Objects.equals(description, task.description) &&
-                status == task.status && id == task.id;
+                status == task.status;
     }
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, status, id);
+        return Objects.hash(id, name, description, status);
     }
 }

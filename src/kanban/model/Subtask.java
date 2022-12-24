@@ -1,28 +1,28 @@
-package Kanban.model;
+package kanban.model;
 
 import java.util.Objects;
 
 public class Subtask extends Task {
-    private final int idEpic;
+    private final int epicId;
 
-    public Subtask(String name, String description, TasksStatus status, int idEpic) {
+    public Subtask(int idEpic, String name, String description, Status status) {
         super(name, description, status);
-        this.idEpic = idEpic;
+        this.epicId = idEpic;
     }
 
     public int getIdEpic() {
-        return idEpic;
+        return epicId;
     }
 
     @Override
-    public TypesTasks getType() {
-        return TypesTasks.SUBTASK;
+    public Types getType() {
+        return Types.SUBTASK;
     }
 
     @Override
     public String toString() {
         return "SubTask{" + "id=" + super.getId() +
-                ", idEpic=" + idEpic +
+                ", idEpic=" + epicId +
                 ", name='" + super.getName() + '\'' +
                 ", description='" + super.getDescription() + '\'' +
                 ", status=" + super.getStatus() + '}';
@@ -34,11 +34,11 @@ public class Subtask extends Task {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Subtask subtask = (Subtask) o;
-        return idEpic == subtask.idEpic;
+        return epicId == subtask.epicId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), idEpic);
+        return Objects.hash(super.hashCode(), epicId);
     }
 }

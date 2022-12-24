@@ -1,23 +1,20 @@
-package Kanban.service;
+package kanban.service;
 
-import Kanban.model.*;
+import kanban.model.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TaskManager {
     protected final Map<Integer, Task> tasks;
     protected final Map<Integer, Epic> epics;
     protected final Map<Integer, Subtask> subtasks;
-    protected final IdTasks idCounter;
+    protected final TaskIdCounter idCounter;
 
     public TaskManager() {
         tasks = new HashMap<>();
         epics = new HashMap<>();
         subtasks = new HashMap<>();
-        idCounter = new IdTasks();
+        idCounter = new TaskIdCounter();
     }
 
     public void addNewTask(Task task) {
@@ -125,7 +122,7 @@ public class TaskManager {
         if (epics.get(id) != null) {
             return epics.get(id).getSubtasksIdInEpic();
         } else {
-            return null;
+            return new ArrayList<>();
         }
     }
 
@@ -178,9 +175,9 @@ public class TaskManager {
         if (epic.getSubtasksIdInEpic() != null) {
             for (int i = 0; i < epic.getSubtasksIdInEpic().size(); i++) {
                 if (subtasks.get(epic.getSubtasksIdInEpic().get(i)) != null) {
-                    if (subtasks.get(epic.getSubtasksIdInEpic().get(i)).getStatus() == TasksStatus.NEW) {
+                    if (subtasks.get(epic.getSubtasksIdInEpic().get(i)).getStatus() == Status.NEW) {
                         statusNewCounter++;
-                    } else if (subtasks.get(epic.getSubtasksIdInEpic().get(i)).getStatus() == TasksStatus.IN_PROGRESS) {
+                    } else if (subtasks.get(epic.getSubtasksIdInEpic().get(i)).getStatus() == Status.IN_PROGRESS) {
                         statusInProgressCounter++;
                     } else {
                         statusDoneCounter++;
@@ -189,14 +186,14 @@ public class TaskManager {
             }
 
             if (statusInProgressCounter == 0 && statusDoneCounter == 0) {
-                epic.setStatus(TasksStatus.NEW);
+                epic.setStatus(Status.NEW);
             } else if (statusDoneCounter > 0 || (statusNewCounter < 1 && statusInProgressCounter < 1)) {
-                epic.setStatus(TasksStatus.DONE);
+                epic.setStatus(Status.DONE);
             } else {
-                epic.setStatus(TasksStatus.IN_PROGRESS);
+                epic.setStatus(Status.IN_PROGRESS);
             }
         } else {
-            epic.setStatus(TasksStatus.NEW);
+            epic.setStatus(Status.NEW);
         }
         epics.put(epic.getId(), epic);
     }
