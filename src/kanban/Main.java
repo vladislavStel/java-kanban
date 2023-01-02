@@ -104,6 +104,13 @@ public class Main {
         System.out.println(taskManager.getSubtaskById(ID_subtask2));
         System.out.println("------------------------------------------------");
 
+        // ИСТОРИЯ ПРОСМОТРОВ
+        System.out.println("История просмотров:");
+        for (int i = 0; i < taskManager.getHistory().getHistoryViewTask().size(); i++) {
+            System.out.println("№" + (i + 1) + " - " + taskManager.getHistory().getHistoryViewTask().get(i));
+        }
+        System.out.println("------------------------------------------------");
+
         // УДАЛЯЕМ TASK, EPIC, SUBTASK ПО ID
         System.out.println("Удаляем по одной task, epic, subtask");
         taskManager.deleteTaskById(ID_task1);
