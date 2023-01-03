@@ -21,8 +21,8 @@ public class Epic extends Task {
     }
 
     @Override
-    public Types getType() {
-        return Types.EPIC;
+    public Type getType() {
+        return Type.EPIC;
     }
 
     public void deleteSubtask(int id) {                     // удаляем id subtask из списка у epic

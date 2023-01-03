@@ -8,7 +8,6 @@ public class Task {
     protected final String description;
     protected Status status;
 
-
     public Task(String name, String description) {
         this.name = name;
         this.description = description;
@@ -50,8 +49,8 @@ public class Task {
         return id;
     }
 
-    public Types getType() {
-        return Types.TASK;
+    public Type getType() {
+        return Type.TASK;
     }
 
     public void setId(int id) {

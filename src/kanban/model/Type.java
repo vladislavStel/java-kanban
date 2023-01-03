@@ -1,6 +1,6 @@
 package kanban.model;
 
-public enum Types {
+public enum Type {
     TASK,
     EPIC,
     SUBTASK
