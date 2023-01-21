@@ -105,6 +105,22 @@ public class Main {
         System.out.println("------------------------------------------------");
 
         // ИСТОРИЯ ПРОСМОТРОВ
+
+        // ДАННЫЕ ДЛЯ ПРОСМОТРА:
+        System.out.println(taskManager.getTaskById(ID_task1));
+        System.out.println(taskManager.getTaskById(ID_task1));
+
+        System.out.println(taskManager.getEpicById(ID_epic1));
+        System.out.println(taskManager.getEpicById(ID_epic1));
+        System.out.println(taskManager.getEpicById(ID_epic3));
+
+        System.out.println(taskManager.getSubtaskById(ID_subtask1));
+        System.out.println(taskManager.getSubtaskById(ID_subtask1));
+
+        System.out.println(taskManager.getTaskById(ID_task1));
+        System.out.println(taskManager.getEpicById(ID_epic1));
+        System.out.println(taskManager.getSubtaskById(ID_subtask1));
+        System.out.println("------------------------------------------------");
         System.out.println("История просмотров:");
         for (int i = 0; i < taskManager.getHistory().getHistoryViewTask().size(); i++) {
             System.out.println("№" + (i + 1) + " - " + taskManager.getHistory().getHistoryViewTask().get(i));
@@ -123,6 +139,13 @@ public class Main {
         System.out.println(taskManager.getSubtasks());
         System.out.println("------------------------------------------------");
 
+        // ПРОВЕРЯЕМ ИСТОРИЮ ПРОСМОТРОВ ПОСЛЕ УДАЛЕНИЯ
+        System.out.println("История просмотров:");
+        for (int i = 0; i < taskManager.getHistory().getHistoryViewTask().size(); i++) {
+            System.out.println("№" + (i + 1) + " - " + taskManager.getHistory().getHistoryViewTask().get(i));
+        }
+        System.out.println("------------------------------------------------");
+
         // УДАЛЯЕМ ВСЕ TASK, EPIC, SUBTASK
         System.out.println("Удаляем все tasks, epics, subtasks...");
         taskManager.deleteAllTasks();
@@ -133,6 +156,13 @@ public class Main {
         System.out.println(taskManager.getTasks());
         System.out.println(taskManager.getEpics());
         System.out.println(taskManager.getSubtasks());
+        System.out.println("------------------------------------------------");
+
+        // ПРОВЕРЯЕМ ИСТОРИЮ ПРОСМОТРОВ ПОСЛЕ ПОЛНОГО УДАЛЕНИЯ
+        System.out.println("История просмотров:");
+        for (int i = 0; i < taskManager.getHistory().getHistoryViewTask().size(); i++) {
+            System.out.println("№" + (i + 1) + " - " + taskManager.getHistory().getHistoryViewTask().get(i));
+        }
         System.out.println("------------------------------------------------");
     }
 }
