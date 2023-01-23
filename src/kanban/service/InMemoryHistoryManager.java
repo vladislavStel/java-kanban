@@ -46,7 +46,7 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
     private List<Task> getTasks() {
-        List<Task> tasksList = new ArrayList<>(20);
+        List<Task> tasksList = new ArrayList<>();
         Node node = first;
         while (node != null) {
             tasksList.add(node.task);
@@ -75,9 +75,9 @@ public class InMemoryHistoryManager implements HistoryManager {
         }
     }
 
-    static class Node {
-        private Task task;
-        private Node prev;
+    static class Node {             // класс Node является статическим вложенным классом и применяется только
+        private Task task;          // в классе InMemoryHistoryManager(является реализацией CustomLinkedList)
+        private Node prev;          // выполнение принципа инкапсуляции))
         private Node next;
 
         public Node(Node prev, Task task, Node next) {
