@@ -75,9 +75,9 @@ public class InMemoryHistoryManager implements HistoryManager {
         }
     }
 
-    static class Node {             // класс Node является статическим вложенным классом и применяется только
-        private Task task;          // в классе InMemoryHistoryManager(является реализацией CustomLinkedList)
-        private Node prev;          // выполнение принципа инкапсуляции))
+    static class Node {
+        private Task task;
+        private Node prev;
         private Node next;
 
         public Node(Node prev, Task task, Node next) {

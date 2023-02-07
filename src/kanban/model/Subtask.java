@@ -5,6 +5,11 @@ import java.util.Objects;
 public class Subtask extends Task {
     private final int epicId;
 
+    public Subtask(int idEpic, String name, String description) {
+        super(name, description);
+        this.epicId = idEpic;
+    }
+
     public Subtask(int idEpic, String name, String description, Status status) {
         super(name, description, status);
         this.epicId = idEpic;
@@ -21,11 +26,7 @@ public class Subtask extends Task {
 
     @Override
     public String toString() {
-        return "SubTask{" + "id=" + super.getId() +
-                ", idEpic=" + epicId +
-                ", name='" + super.getName() + '\'' +
-                ", description='" + super.getDescription() + '\'' +
-                ", status=" + super.getStatus() + '}';
+        return super.toString() + "," +getIdEpic();
     }
 
     @Override

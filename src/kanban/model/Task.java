@@ -63,12 +63,12 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", id=" + id +
-                ", status=" + status +
-                '}';
+        return String.format("%d,%s,%s,%s,%s",
+                getId(),
+                getType(),
+                getName(),
+                getDescription(),
+                getStatus());
     }
     @Override
     public boolean equals(Object o) {
