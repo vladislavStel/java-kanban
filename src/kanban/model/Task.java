@@ -70,6 +70,7 @@ public class Task {
                 getDescription(),
                 getStatus());
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
