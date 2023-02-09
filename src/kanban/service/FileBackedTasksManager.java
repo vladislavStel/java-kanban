@@ -102,22 +102,21 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         System.out.println("-----------------------------------------------------------------------------------------");
 
         System.out.println("Восстанавливаем состояние менеджера из файла");
-        TaskManager fileManager2 = loadFromFile(new File("src/kanban/saveInstanceState.csv"));
+        fileManager.loadFromFile(new File("src/kanban/saveInstanceState.csv"));
         System.out.println("-----------------------------------------------------------------------------------------");
 
         System.out.println("Получаем историю");
-        System.out.println(fileManager2.getHistory().getHistoryViewTask());
+        System.out.println(fileManager.getHistory().getHistoryViewTask());
     }
 
-    public static FileBackedTasksManager loadFromFile(File file) {
+    public void loadFromFile(File file) {
         int maxIdTask = 0;
         FileBackedTasksManager fileBackedTasksManager = new FileBackedTasksManager(file);
-        try (FileReader reader = new FileReader(file.toString());
-             BufferedReader br = new BufferedReader(reader)) {
-            while (br.ready()) {
-                String line = br.readLine();
+        try (BufferedReader reader = new BufferedReader(new FileReader(file.toString()))) {
+            while (reader.ready()) {
+                String line = reader.readLine();
                 if (line.isEmpty()) {
-                    line = br.readLine();
+                    line = reader.readLine();
                     if (line == null) {
                         continue;
                     }
@@ -162,7 +161,6 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
             throw new ManagerSaveException(ex.getMessage());
         }
         fileBackedTasksManager.idCounter.setIdCounter(maxIdTask);
-        return fileBackedTasksManager;
     }
 
     protected void save() {
