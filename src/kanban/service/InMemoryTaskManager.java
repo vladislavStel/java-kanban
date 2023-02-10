@@ -52,6 +52,7 @@ public class InMemoryTaskManager implements TaskManager{
     public void updateSubtask(Subtask subtask) {
         if (subtasks.containsKey(subtask.getId()) && epics.containsKey(subtask.getIdEpic())) {
                 subtasks.put(subtask.getId(), subtask);
+                getSubtasksInEpic(subtask.getIdEpic()).add(subtask.getId());
                 updateStatusEpic(subtask.getIdEpic());
         }
     }
@@ -202,7 +203,7 @@ public class InMemoryTaskManager implements TaskManager{
 
     @Override
     public void updateStatusEpic(int id) {
-        Epic epic = new Epic(epics.get(id).getName(), epics.get(id).getDescription(), id);
+        Epic epic = new Epic(id, epics.get(id).getName(), epics.get(id).getDescription());
         epic.setSubtasksIdInEpic(epics.get(id).getSubtasksIdInEpic());
 
         int statusNewCounter = 0;

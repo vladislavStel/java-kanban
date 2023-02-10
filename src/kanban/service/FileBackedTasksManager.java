@@ -111,7 +111,6 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
 
     public void loadFromFile(File file) {
         int maxIdTask = 0;
-        FileBackedTasksManager fileBackedTasksManager = new FileBackedTasksManager(file);
         try (BufferedReader reader = new BufferedReader(new FileReader(file.toString()))) {
             while (reader.ready()) {
                 String line = reader.readLine();
@@ -123,12 +122,12 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
                     String[] split = line.split(",");
                     for (String str : split) {
                         int key = Integer.parseInt(str);
-                        if (fileBackedTasksManager.tasks.containsKey(key)) {
-                            fileBackedTasksManager.getTaskById(key);
-                        } else if (fileBackedTasksManager.epics.containsKey(key)) {
-                            fileBackedTasksManager.getEpicById(key);
-                        } else if (fileBackedTasksManager.subtasks.containsKey(key)) {
-                            fileBackedTasksManager.getSubtaskById(key);
+                        if (tasks.containsKey(key)) {
+                            getTaskById(key);
+                        } else if (epics.containsKey(key)) {
+                            getEpicById(key);
+                        } else if (subtasks.containsKey(key)) {
+                            getSubtaskById(key);
                         }
                     }
                     break;
@@ -137,21 +136,21 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
                 if (Type.TASK.toString().equals(split[1])) {
                     Task task = new Task(split[2], split[3], Status.valueOf(split[4]));
                     task.setId(Integer.parseInt(split[0]));
-                    fileBackedTasksManager.addNewTask(task);
+                    addNewTask(task);
                     if (task.getId() > maxIdTask) {
                         maxIdTask = task.getId();
                     }
                 } else if ((Type.EPIC.toString().equals(split[1]))) {
                     Epic epic = new Epic(split[2], split[3], Status.valueOf(split[4]));
                     epic.setId(Integer.parseInt(split[0]));
-                    fileBackedTasksManager.addNewTask(epic);
+                    addNewTask(epic);
                     if (epic.getId() > maxIdTask) {
                         maxIdTask = epic.getId();
                     }
                 } else if ((Type.SUBTASK.toString().equals(split[1]))) {
                     Subtask subtask = new Subtask(Integer.parseInt(split[5]), split[2], split[3], Status.valueOf(split[4]));
                     subtask.setId(Integer.parseInt(split[0]));
-                    fileBackedTasksManager.addNewTask(subtask);
+                    addNewTask(subtask);
                     if (subtask.getId() > maxIdTask) {
                         maxIdTask = subtask.getId();
                     }
@@ -160,7 +159,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         } catch (IOException ex) {
             throw new ManagerSaveException(ex.getMessage());
         }
-        fileBackedTasksManager.idCounter.setIdCounter(maxIdTask);
+        idCounter.setIdCounter(maxIdTask);
     }
 
     protected void save() {
