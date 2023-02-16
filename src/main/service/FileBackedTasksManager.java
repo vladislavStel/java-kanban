@@ -1,7 +1,7 @@
-package kanban.service;
+package service;
 
-import kanban.exceptions.ManagerSaveException;
-import kanban.model.*;
+import exceptions.ManagerSaveException;
+import model.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -102,7 +102,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         System.out.println("-----------------------------------------------------------------------------------------");
 
         System.out.println("Восстанавливаем состояние менеджера из файла");
-        fileManager.loadFromFile(new File("src/kanban/saveInstanceState.csv"));
+        fileManager.loadFromFile(new File("src/main/saveInstanceState.csv"));
         System.out.println("-----------------------------------------------------------------------------------------");
 
         System.out.println("Получаем историю");

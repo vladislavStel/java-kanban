@@ -1,10 +1,10 @@
-package kanban.service;
+package service;
 
 import java.util.List;
 
-import kanban.model.Epic;
-import kanban.model.Subtask;
-import kanban.model.Task;
+import model.Task;
+import model.Epic;
+import model.Subtask;
 
 public interface TaskManager {
 

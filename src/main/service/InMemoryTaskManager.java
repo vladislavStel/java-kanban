@@ -1,6 +1,6 @@
-package kanban.service;
+package service;
 
-import kanban.model.*;
+import model.*;
 
 import java.util.*;
 

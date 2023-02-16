@@ -1,11 +1,9 @@
-package kanban;
-
-import kanban.model.Epic;
-import kanban.model.Subtask;
-import kanban.model.Status;
-import kanban.model.Task;
-import kanban.service.Managers;
-import kanban.service.TaskManager;
+import model.Task;
+import model.Epic;
+import model.Subtask;
+import model.Status;
+import service.Managers;
+import service.TaskManager;
 
 public class Main {
 

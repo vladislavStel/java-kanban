@@ -1,4 +1,4 @@
-package kanban.service;
+package service;
 
 public class TaskIdCounter {
     private int idCounter;

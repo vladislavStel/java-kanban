@@ -1,4 +1,4 @@
-package kanban.model;
+package model;
 
 public enum Type {
     TASK,
