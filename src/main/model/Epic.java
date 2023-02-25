@@ -1,19 +1,17 @@
 package model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Epic extends Task {
+    private LocalDateTime endTime;
     private ArrayList<Integer> subtasksIds = new ArrayList<>();
 
-    public Epic(String name, String description) {
-        super(name, description);
-    }
-
-    public Epic(String name, String description, Status status) {
-        super(name, description, status);
-    }
-    public Epic(int id, String name, String description) {
-        super(id, name, description);
+    public Epic(String name,
+                String description,
+                Status status) {
+        super(name, description, status, Optional.empty(), Optional.empty());
     }
 
     public ArrayList<Integer> getSubtasksIdInEpic() {
@@ -27,6 +25,19 @@ public class Epic extends Task {
     @Override
     public Type getType() {
         return Type.EPIC;
+    }
+
+    @Override
+    public Optional<LocalDateTime> getEndTime() {
+        if (endTime == null) {
+            return Optional.empty();
+        } else {
+            return Optional.of(endTime);
+        }
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
     }
 
     public void deleteSubtask(int id) {                     // удаляем id subtask из списка у epic
