@@ -5,17 +5,28 @@ import model.Status;
 import service.Managers;
 import service.TaskManager;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 public class Main {
 
     public static void main(String[] args) {
         TaskManager taskManager = Managers.getDefault();
 
-        Task task1 = new Task("Task №1", "Описание", Status.NEW);
-        Task task2 = new Task("Task №2", "Описание", Status.NEW);
+        Optional<LocalDateTime> dateTime1 = Optional.of(LocalDateTime.of(2023, 2, 12, 11, 30));
+        Optional<LocalDateTime> dateTime2 = Optional.of(LocalDateTime.of(2023, 2, 13, 11, 30));
+        Optional<LocalDateTime> dateTime3 = Optional.of(LocalDateTime.of(2023, 2, 14, 11, 30));
+        Optional<LocalDateTime> dateTime4 = Optional.of(LocalDateTime.of(2023, 2, 15, 11, 30));
+        Optional<LocalDateTime> dateTime5 = Optional.of(LocalDateTime.of(2023, 2, 16, 11, 30));
+        Optional<Duration> duration10 = Optional.of(Duration.ofMinutes(10));
 
-        Epic epic1 = new Epic("Epic №1", "Описание");
-        Epic epic2 = new Epic("Epic №2", "Описание");
-        Epic epic3 = new Epic("Epic №3", "Описание");
+        Task task1 = new Task("Task №1", "Описание", Status.NEW, dateTime4, duration10);
+        Task task2 = new Task("Task №2", "Описание", Status.NEW, dateTime5, duration10);
+
+        Epic epic1 = new Epic("Epic №1", "Описание", Status.NEW);
+        Epic epic2 = new Epic("Epic №2", "Описание", Status.NEW);
+        Epic epic3 = new Epic("Epic №3", "Описание", Status.NEW);
 
         // ДОБАВЛЯЕМ TASKS
         taskManager.addNewTask(task1);
@@ -37,9 +48,9 @@ public class Main {
         int ID_epic2 = epic2.getId();
         int ID_epic3 = epic3.getId();
 
-        Subtask subtask1 = new Subtask(ID_epic1, "Subtask №1", "Описание", Status.NEW);
-        Subtask subtask2 = new Subtask(ID_epic1, "Subtask №2", "Описание", Status.NEW);
-        Subtask subtask3 = new Subtask(ID_epic2, "Subtask №3", "Описание", Status.NEW);
+        Subtask subtask1 = new Subtask(ID_epic1, "Subtask №1", "Описание", Status.NEW, dateTime1, duration10);
+        Subtask subtask2 = new Subtask(ID_epic1, "Subtask №2", "Описание", Status.NEW, dateTime2, duration10);
+        Subtask subtask3 = new Subtask(ID_epic2, "Subtask №3", "Описание", Status.NEW, dateTime3, duration10);
 
         taskManager.addNewTask(subtask1);
         taskManager.addNewTask(subtask2);
@@ -67,7 +78,7 @@ public class Main {
 
         // ОБНОВЛЯЕМ STATUS, DESCRIPTION и NAME TASKS
         System.out.println("Меняем данные Task №1");
-        Task newTask1 = new Task("Task №1", "Новое описание", Status.IN_PROGRESS);
+        Task newTask1 = new Task("Task №1", "Новое описание", Status.IN_PROGRESS, dateTime1, duration10);
         newTask1.setId(ID_task1);
         taskManager.updateTask(newTask1);
         System.out.println("Меняем статус Task №2 с NEW на DONE");
