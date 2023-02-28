@@ -267,9 +267,9 @@ abstract class TaskManagerTest<T extends TaskManager> {
                 Optional.of(LocalDateTime.of(2022, 7, 1, 10, 0)),
                 Optional.of(Duration.ofMinutes(60 * 24)));
         taskManager.addNewTask(subTask1Epic1);
-        final List<Integer> subtasks = taskManager.getSubtasksInEpic(epic1Id);
+        final List<Subtask> subtasks = taskManager.getSubtasksInEpic(epic1Id);
         assertEquals(1, subtasks.size(), "Неверное количество задач");
-        assertEquals(subTask1Epic1, taskManager.getSubtaskById(subtasks.get(0)), "Задачи не совпадают");
+        assertEquals(subTask1Epic1, subtasks.get(0), "Задачи не совпадают");
     }
 
     @Test

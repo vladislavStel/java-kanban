@@ -1,6 +1,6 @@
 package service;
 
-import exceptions.ManagerSaveException;
+import exception.ManagerSaveException;
 import model.*;
 
 import java.io.*;
@@ -69,9 +69,8 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         }
         System.out.println("Устанавливаем статус DONE всем таскам.");
 
-        for (Integer key : fileManager.getSubtasksInEpic(ID_epic1)) {
-            fileManager.getSubtaskById(key).setStatus(Status.DONE);
-            fileManager.updateStatusEpic(ID_epic1);
+        for (Subtask subtask : fileManager.getSubtasksInEpic(ID_epic1)) {
+            subtask.setStatus(Status.DONE);
         }
         System.out.println("Устанавливаем статус DONE всем сабтаскам эпика 1.");
         System.out.println("-----------------------------------------------------------------------------------------");
@@ -144,7 +143,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
                 String[] split = line.split(",");
                 if (Type.TASK.toString().equals(split[1])) {
                     Task task =new Task(split[2], split[4], Status.valueOf(split[3]),
-                            Optional.of(LocalDateTime.parse(split[5], Task.formatter)),
+                            Optional.of(LocalDateTime.parse(split[5], Task.FORMATTER)),
                             Optional.of(Duration.parse(split[6])));
                     addNewTask(task);
                     if (task.getId() > maxIdTask) {
@@ -152,10 +151,6 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
                     }
                 } else if ((Type.EPIC.toString().equals(split[1]))) {
                     Epic epic = new Epic(split[2], split[4], Status.valueOf(split[3]));
-                    if (!split[5].equals("null") && !split[6].equals("null")) {
-                        epic.setStartTime(LocalDateTime.parse(split[5], Task.formatter));
-                        epic.setDuration(Duration.parse(split[6]));
-                    }
                     epic.setId(Integer.parseInt(split[0]));
                     addNewTask(epic);
                     if (epic.getId() > maxIdTask) {
@@ -164,7 +159,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
                 } else if ((Type.SUBTASK.toString().equals(split[1]))) {
                     Subtask subtask = new Subtask(Integer.parseInt(split[7]), split[2], split[4],
                             Status.valueOf(split[3]),
-                            Optional.of(LocalDateTime.parse(split[5], Task.formatter)),
+                            Optional.of(LocalDateTime.parse(split[5], Task.FORMATTER)),
                             Optional.of(Duration.parse(split[6])));
                     subtask.setId(Integer.parseInt(split[0]));
                     addNewTask(subtask);

@@ -40,9 +40,7 @@ public interface TaskManager {
 
     List<Subtask> getSubtasks();
 
-    List<Integer> getSubtasksInEpic(int id);
-
-    void updateStatusEpic(int id);
+    List<Subtask> getSubtasksInEpic(int id);
 
     List<Task> getPrioritizedTasks();
 

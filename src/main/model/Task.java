@@ -8,13 +8,15 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class Task {
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy_HH:mm");
+
     protected int id;
     protected final String name;
     protected final String description;
     protected Status status;
     protected Optional<LocalDateTime> startTime;
     protected Optional<Duration> duration;
-    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy_HH:mm");
+
     public static final Comparator<Task> comparator = (task1, task2) -> {
         if (task1.getId() == task2.getId()) {
             return 0;
@@ -90,14 +92,6 @@ public class Task {
         this.status = status;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = Optional.of(startTime);
-    }
-
-    public void setDuration(Duration duration) {
-        this.duration = Optional.of(duration);
-    }
-
     public Optional<LocalDateTime> getEndTime() {
         return Optional.of(startTime.get().plus(duration.get()));
     }
@@ -110,7 +104,7 @@ public class Task {
                 getName(),
                 getStatus(),
                 getDescription(),
-                getStartTime().isPresent() ? getStartTime().get().format(formatter) : "null",
+                getStartTime().isPresent() ? getStartTime().get().format(FORMATTER) : "null",
                 getDuration().isPresent() ? getDuration().get().toString() : "null");
     }
 
@@ -126,6 +120,7 @@ public class Task {
                 Objects.equals(startTime, task.startTime) &&
                 Objects.equals(duration, task.duration);
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(id, name, description, status, startTime, duration);
