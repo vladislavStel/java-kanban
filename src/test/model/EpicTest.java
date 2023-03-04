@@ -1,5 +1,6 @@
 package model;
 
+import service.InMemoryTaskManager;
 import service.Managers;
 import service.TaskManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +19,7 @@ class EpicTest {
 
     @BeforeEach
     public void beforeEach() {
-        taskManager = Managers.getDefault();
+        taskManager = new InMemoryTaskManager(Managers.getDefaultHistory());
         epic1 = new Epic("Epic1Name", "Epic1Description", NEW);
         taskManager.addNewTask(epic1);
     }

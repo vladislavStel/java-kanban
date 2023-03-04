@@ -13,16 +13,16 @@ import java.nio.file.StandardOpenOption;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class FileBackedTasksManagerTest extends TaskManagerTest<FileBackedTasksManager>  {
-    private final String filePath = "src/main/saveInstanceState.csv";
+class FileBackedTasksManagerTest extends TaskManagerTest<FileBackedTasksManager> {
+    private final String filePath = "saveInstanceState.csv";
+
     @BeforeEach
     public void start() {
-        taskManager = Managers.getDefaultFileBackedTasksManager();
+        taskManager = new FileBackedTasksManager(Managers.getDefaultHistory(), new File(filePath));
     }
 
     @Test
     public void loadFromFileAndSaveTestTask() {
-        // для тестирования - очистка содержимого файла
         try {
             BufferedWriter bw = Files.newBufferedWriter(Path.of(filePath), StandardOpenOption.TRUNCATE_EXISTING);
             bw.close();
@@ -41,7 +41,6 @@ class FileBackedTasksManagerTest extends TaskManagerTest<FileBackedTasksManager>
 
     @Test
     public void loadFromFileAndSaveTestEpic() {
-        // для тестирования - очистка содержимого файла
         try {
             BufferedWriter bw = Files.newBufferedWriter(Path.of(filePath), StandardOpenOption.TRUNCATE_EXISTING);
             bw.close();
