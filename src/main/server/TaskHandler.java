@@ -210,7 +210,7 @@ public class TaskHandler implements HttpHandler {
     }
 
     private void pathTasksSubtaskEpicGetProcessing(HttpExchange h, Optional<String> query) throws IOException {
-        if (query.isPresent()) {
+        if (query.isEmpty()) {
             String[] queryElements = query.get().split("=");
             if (queryElements[0].equals("id") && isNumeric(queryElements[1])) {
                 int id = Integer.parseInt(queryElements[1]);
