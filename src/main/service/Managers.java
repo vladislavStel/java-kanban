@@ -8,7 +8,7 @@ public class Managers {
 
     public static TaskManager getDefault() {
         try {
-            return new HTTPTaskManager(Managers.getDefaultHistory(), URI.create("http://localhost:8078"));
+            return new HttpTaskManager(Managers.getDefaultHistory(), URI.create("http://localhost:8078"));
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }

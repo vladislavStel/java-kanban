@@ -22,7 +22,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class HTTPTaskManagerTest {
+class HttpTaskManagerTest extends TaskManagerTest<HttpTaskManager> {
     private HttpTaskServer httpTaskServer;
     private TaskManager taskManager;
     private final Gson gson = new Gson();

@@ -13,11 +13,11 @@ import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
-public class HTTPTaskManager extends FileBackedTasksManager {
+public class HttpTaskManager extends FileBackedTasksManager {
     private final KVTaskClient kvTaskClient;
     private final Gson gson = new Gson();
 
-    public HTTPTaskManager(HistoryManager historyManager, URI url) throws IOException, InterruptedException {
+    public HttpTaskManager(HistoryManager historyManager, URI url) throws IOException, InterruptedException {
         super(historyManager);
         this.kvTaskClient = new KVTaskClient(url);
     }
